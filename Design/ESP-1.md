@@ -49,7 +49,7 @@
 
 ### ERD
 
-> TODO: *ERD image here*
+![Customer Orders](./ESP.png)
 
 ----
 
