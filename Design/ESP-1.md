@@ -36,6 +36,17 @@
 
 **Customer:** <span class="md"><b class="pk">CustomerNumber</b>, FirstName, lastname, Adress, City, Province, PostalCode, Phone</span>
 
+### Finale Entities
+
+**Order:** <span class="md"><b class="pk">OrderNumber</b>, <u class="fk">CustomerNumber</u>, Date, Subtotal, GST, Total</span>
+
+**Customer:** <span class="md"><b class="pk">CustomerNumber</b>, FirstName, lastname, Adress, City, Province, PostalCode, Phone</span>
+
+**OrderDetail:** <span class="md"><b class="pk"><u class="fk">OrderNumber</u>, <u class="fk">ItemNumber</u></b>, Quantity, SellingPrice, Amount</span>
+
+**Item:** <span class="md"><b class="pk">ItemNumber</b>, Description, CurrentPrice</span>
+
+
 ### ERD
 
 > TODO: *ERD image here*
