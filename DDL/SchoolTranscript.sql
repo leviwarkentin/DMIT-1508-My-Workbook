@@ -88,8 +88,8 @@ CREATE TABLE StudentCourses
 				   [Status] = 'C' OR
 				   [Status] = 'W')
 --			CHECK ([Status] IN ('E', 'C', 'W'))
-		CONSTRAINT DF_StudentCourses_Status
-			DEFAULT ('E')
+--		CONSTRAINT DF_StudentCourses_Status
+--			DEFAULT ('E')
 						       NOT NULL,
     -- Table-level definition for Composite Primary Keys 
     CONSTRAINT PK_StudentCourses_StudentID_CourseNumber
@@ -127,3 +127,26 @@ ALTER TABLE Students
 		ADD CONSTRAINT CK_Students_PostalCode
 			CHECK (PostalCode LIKE '[A-Z][0-9][A-Z][0-9][A-Z][0-9]')
 			-- Match for T4R1H2       T    4    R    1    H    2
+GO
+
+
+-- 3) Add a default constraint for the Status column of StudentCourses
+--    Set 'E' as the default value.
+ALTER TABLE StudentCourses
+	ADD CONSTRAINT DF_StudentCourses_Status
+		DEFAULT ('E') FOR [Status] -- In an ALTER TABLE statement, the column myust be 
+								   -- Specified for the default value
+GO
+
+/* ----------- Odds and ENDS -------------------- */
+sp_help Students ----- Get the schema information for the Students table
+
+-- In a table, we can have some columns be "calculated" or "derived" columns
+-- where the value of the column is a calculation from other columns.
+CREATE TABLE Invoice 
+(
+	InvoiceId		int		NOT NULL,
+	Subtotal		money	NOT NULL,
+	GST				money	NOT NULL,
+	TOTAL			AS Subtotal + GST	-- This is a computed column
+)
