@@ -6,7 +6,7 @@ Use [A01-School]
 GO
 
 --1.	Select the average Mark from all the Marks in the registration table
-SELECT  AVG(Mark) AS 'Average Mark'
+SELECT  AVG(Mark) AS 'Average Mark' -- we need to give the column an alias/title
 FROM    Registration
 
 --1.a.  Show the average mark, the total of all marks, and a count of all marks.
@@ -20,7 +20,8 @@ FROM    Registration
 SELECT  AVG(Mark) AS 'Average Mark' -- Some Aggregate functions expect to work with numbers
 FROM    Registration
 WHERE   CourseId = 'DMIT104'
-
+-- Exploring - What are all the marks in Registration?
+-- SELECT * FROM REGISTRATION ORDER BY CourseID
 --3.	Select how many students are there in the Student Table
 SELECT  COUNT(FirstName) AS 'Student Count'
 FROM    Student
