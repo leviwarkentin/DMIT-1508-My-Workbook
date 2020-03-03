@@ -23,25 +23,42 @@ WHERE  PaymentTypeDescription = 'cash'
 
 --2. Select The Student ID's of all the students that are in the 'Association of Computing Machinery' club
 -- TODO: Student Answer Here
+SELECT	StudentID
+FROM	Activity
+WHERE	ClubID = (SELECT ClubID FROM Club
+	WHERE ClubName = 'Association of Computing machinery')
+	
 
 -- 2.b. Select the names of all the students in the 'Association of Computing Machinery' club. Use a subquery for your answer. When you make your answer, ensure the outmost query only uses the Student table in its FROM clause.
+SELECT	Firstname + ' ' + LastName AS 'Student'
+FROM	Student
+WHERE	StudentID IN (SELECT	StudentID
+					FROM	Activity
+					WHERE	ClubID =	(SELECT ClubID FROM Club
+										WHERE ClubName = 'Association of Computing machinery'))
+
 
 --3. Select All the staff full names for staff that have taught a course.
 SELECT FirstName + ' ' + LastName AS 'Staff'
 FROM   Staff
 WHERE  StaffID IN -- I used IN because the subquery returns many rows
-    (SELECT DISTINCT StaffID FROM Registration)
+    (SELECT DISTINCT StaffID FROM Registration) -- DISTINCT takes out duplicates
 
 -- The above can also be done as an INNER JOIN...
 SELECT DISTINCT FirstName + ' ' + LastName AS 'Staff'
 FROM Staff
     INNER JOIN Registration
-        ON Staff.StaffID = Registration.StaffID 
+        ON Staff.StaffID = Registration.StaffID
 
 
 --4. Select All the staff full names that taught DMIT172.
 -- TODO: Student Answer Here
-
+SELECT FirstName + ' ' + LastName AS 'Staff'
+FROM   Staff
+WHERE  StaffID IN 
+    (SELECT Courseid FROM Registration 
+	WHERE Courseid = (SELECT CourseID FROM Course
+						WHERE CourseName = 'DMIT172'))
 
 --5. Select All the staff full names of staff that have never taught a course
 SELECT FirstName + ' ' + LastName AS 'Staff'
