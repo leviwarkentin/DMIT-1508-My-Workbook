@@ -1,5 +1,27 @@
 -- Stored Procedures (Sprocs)
 -- Validating Parameter Values
+/*
+We can validate a parameter values using IF/ELSE statements. An IF/ELSE statement is called
+a "flow-Control" statement because it controls whether or not another statement (or statement block)
+will execute. the grammer of the IF/ELSE statement is as follows:
+
+IF (condotional_expression)
+	Statement_or_StatementBloc -- TRUE side
+ELSE
+	Statement_or_StatementBlock -- FALSE side
+
+Where the condoition_expression is some kind of expression that results in a boolean 
+(TRUE/FALSE) value, and Statement_or_StatementBlock is a single item that is executed on either the true or false side of the IF/ELSE statement.
+A "statement block" is one or more statments inside of a pair of BEGIN/END
+For example, the block consists of two statements (an INSERT and a SELECT) but can be considered a single "block" of statements:
+
+
+BEGIN
+	INSERT INTO SomeTable(Some, Column, Names)
+	VALUE (@Some, @param, @values)
+	SELECT @@IDENTITY -- to get the generated primary key
+END
+*/
 
 USE [A01-School]
 GO
@@ -24,6 +46,7 @@ GO
 -- sp_help Club -- Running the sp_help stored procedure will give you information about a table, sproc, etc.
 CREATE PROCEDURE AddClub
     -- Parameters here
+	-- In SQL, the variables/paramter names always start with the @ symbol
     @ClubId     varchar(10),
     @ClubName   varchar(50)
 AS
@@ -79,7 +102,7 @@ AS
     -- Body of procedure here
     IF @PartialID IS NULL OR LEN(@PartialID) < 2
     BEGIN   -- {
-        RAISERROR('The partial ID must be two or more characters', 16, 1)
+        RAISERROR('Club ID and Name are required', 16, 1)
         -- The 16 is the error number and the 1 is the severity
     END     -- }
     SELECT  ClubID, ClubName
