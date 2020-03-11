@@ -46,9 +46,9 @@ WHERE  City = 'Edm'
 
 -- ======= Practice ========
 -- 5. For each student that does not have a mark in the Registration table,
---    create an update statement that gives each student a different mark.
+--    create a seperate update statement that gives each student a different mark.
 -- TODO: Student Answer Here....
-
+SELECT * FROM Registration
 -- 6. Choose a student from the previous question and withdraw them from all
 --    their courses.
 -- TODO: Student Answer Here....
